@@ -62,6 +62,6 @@ spring:
 
 app:
   jwt:
-    secretKey: 239192-3999-01002-39123
+    secretKey: 1234-1234-1234-1234
     ACCESS_TOKEN_EXPIRE_TIME: 1800000    # 1000 * 60 * 30   30?
     REFRESH_TOKEN_EXPIRE_TIME: 3600000   # 1000 * 60 * 60   60?
