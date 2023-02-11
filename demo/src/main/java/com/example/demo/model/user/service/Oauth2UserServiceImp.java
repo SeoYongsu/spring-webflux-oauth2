@@ -5,6 +5,7 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.client.userinfo.ReactiveOAuth2UserService;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
+import org.springframework.security.oauth2.client.userinfo.DefaultReactiveOAuth2UserService;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Mono;
 
@@ -13,6 +14,10 @@ import reactor.core.publisher.Mono;
 public class Oauth2UserServiceImp implements ReactiveOAuth2UserService<OAuth2UserRequest, OAuth2User> {
     @Override
     public Mono<OAuth2User> loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
-        return null;
+        final DefaultReactiveOAuth2UserService delegate = new DefaultReactiveOAuth2UserService();
+        return delegate.loadUser(userRequest).flatMap(oAuth2User -> {
+            
+            return Mono.just(oAuth2User);
+        });
     }
 }
